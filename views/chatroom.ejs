@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chat-app</title>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
+   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+   <link href="/chat.css" rel="stylesheet" type="text/css"></link>
+   <link href="menu.css" rel="stylesheet" type="text/css"></link>
+</head>
+<body>
+    <div id="title">
+        <h1 id='room_name'><%=room_name%></h1>
+    </div>
+    <div id="container">
+    <div id='name'>
+        <h2 id='person'>user</h2>
+    </div>
+    <div id="block"> 
+        <!--cancel-->
+    <div class="chat" id = "chat">
+        hello 
+    </div>
+    <div class="mychat" id = "mychat">
+        hey  
+ </div>
+        <input type='text' name='text' id='msg' placeholder="type here">
+        <button onclick="sendChatRoom()">send</button>
+    </div>
+</div>
+<!--<script src='/menu.js'></script>-->
+<script src='/chat.js'></script>
+</body>
+</html>

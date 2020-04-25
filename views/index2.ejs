@@ -1,0 +1,43 @@
+<!--put / before chat.css after converting to ejs-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chat-app</title>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
+   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+   <link href="/chat.css" rel="stylesheet" type="text/css"></link>
+</head>
+<body>
+    <div class='chatpage'>
+    <div class="container">
+    <div class='heading'>
+        <div class='fimg'><img src="/user-images/img<%=myid%>"></div>
+        <div id='uname' class='fname'><%= name %></div>
+        <div class="bar">
+            <ul>
+                <li><a href="/find/<%= myid %>"><i class="material-icons">search</i></a></li>
+                <li><a href="/request"><i class="material-icons">person</i></a></li>
+                <li><a onclick="deleteFriend()"><i class="material-icons">delete</i></a></li>
+                <li><a><i class="material-icons">menu</i></a></li>
+            </ul>
+           </div> 
+    </div>
+    <div class='id' id="id"><%=myid%></div>
+    <div id="block" class="block">
+        <div class="list">
+            <% for(friend in fid){ %> 
+            <div class="friend-status"><div class="fimg" ><img src="/user-images/img<%=fid[friend]%>"></div><div id="<%= fid[friend] %>" class="friend"><a href='/chat/<%=fname[friend]%>/<%=fid[friend]%>/<%=myid%>/<%=name%>'"><%= fname[friend] %></a></div><div class = status id='s<%= fid[friend] %>'></div><div class='blank' id='<%= fid[friend] %>/<%=fname[friend]%>'></div></div>
+            <div class="line"></div>
+           <% } %>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<!--<script src='/menu.js'></script>-->
+<script src='/index.js'></script>
+</body>
+</html>

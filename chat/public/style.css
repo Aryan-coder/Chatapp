@@ -1,0 +1,85 @@
+body{
+    font-family: Arial;
+    color: white;
+    background-color: darkgreen;
+}
+
+#title{
+    text-align: left;
+    opacity: 0;
+}
+
+#container{
+    background-color:rgb(60, 179, 60);
+    width: 450px;
+    height: 590px;
+    margin-top: -60px;
+    margin-left: 450px;
+}
+
+input{
+    position: absolute;
+    width: 320px;
+    bottom: 20px;
+    border: 0px;
+    height: 40px;
+    margin-left: 20px;
+    font-size: larger;
+    border-radius: 12px;
+}
+
+button{
+    position: absolute;
+    bottom: 20px;
+    border: 0px;
+    width: 50px;
+    height: 42px;
+    margin-left: 350px;
+    background-color: brown;
+    color: white;
+    border-radius: 12px;
+}
+
+#name{
+    font-size: 18px;
+    padding-left: 10px;
+    background-color:rgb(12, 153, 12);
+    color: white;
+}
+
+.chat{
+    font-size: 20px;
+    background-color: white;
+    color: brown;
+    width: max-content;
+    margin-left: 10px;
+    border-radius: 12px 12px 12px 12px;
+    margin-top: 40px;
+    padding: 5px;
+}
+
+.mychat{
+    padding: 5px;
+    font-size: 20px;
+    margin-top: 40px;
+    background-color: white;
+    color: brown;
+    width: max-content;
+    margin-left: 400px;
+    border-radius: 12px 12px 12px 12px;
+    margin-top: 10px;
+}
+
+#you{
+    margin-top: -50px;
+    margin-left: 380px;
+    font-size: 18;
+}
+
+.options{
+    opacity: 0;
+}
+
+#temp{
+    margin-left: -500px;
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
+    <link href="/index.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+   
+</head>
+<body>
+    <div class="bar">
+        <ul>
+            <li><a href="/find/<%= myid %>"><i class="material-icons">search</i></a></li>
+            <li><a href="/request"><i class="material-icons">person</i></a></li>
+            <li><a onclick="deleteFriend()"><i class="material-icons">delete</i></a></li>
+            <li><a><i class="material-icons">menu</i></a></li>
+        </ul>
+       </div> 
+    <div class="container">
+        <div class="user">
+            <div class="image"><img src="/user-images/img<%=myid%>"></div>
+            <div class="name" id='uname'><%= name %></div>
+            <div id='id'><%= myid %></div>
+        </div>
+        <div class="list">
+            <% for(friend in fid){ %> 
+            <div class="friend-status"><div class="fimg" ><img src="/user-images/img<%=fid[friend]%>"></div><div id="<%= fid[friend] %>" class="friend"><a href='/chat/<%=fname[friend]%>/<%=fid[friend]%>/<%=myid%>'"><%= fname[friend] %></a></div><div class = status id='s<%= fid[friend] %>'+></div><div class='delete' id='d<%= fid[friend] %>/<%=fname[friend]%>'></div></div>
+            <div class="line"></div>
+           <% } %>
+        </div>
+        <div>
+            <a href='/find/<%= myid %>'>new</a>
+        </div>
+        <div id="room">
+        </div>
+    </div>
+    <script src='/index.js'></script>
+</body>
+</html>

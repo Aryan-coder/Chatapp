@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
+    <link href="/index.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+   
+</head>
+<body>
+    <div class="bar">
+        <ul>
+            <li><a href="/find"><i class="material-icons">search</i></a></li>
+            <li><a href="/request"><i class="material-icons">person</i></a></li>
+            <li><a href="/friend"><i class="material-icons">delete</i></a></li>
+            <li><a><i class="material-icons">menu</i></a></li>
+        </ul>
+       </div> 
+    <div class="container">
+        <div class="user">
+            <div class="image"><img src="/user-images/<%=photo%>"></div>
+            <div class="name"><%= name %></div>
+            <div id='id'><%= myid %></div>
+        </div>
+        <div class="list">
+            <% for(friend in fid){ %> 
+            <div class="friend-status"><div class="fimg"><img src="/user-images/<%=fimage[friend]%>"></div><div id="<%= fid[friend] %>" class="friend"><a href='chatroom/<%=myid%>'><%= fname[friend] %></a></div><div class='status' id='s<%= fid[friend] %>'></div></div>
+            <div class="line"></div>
+           <% } %>
+        </div>
+        <div>
+            <a href='/find/<%= myid %>'>new</a>
+        </div>
+    </div>
+    <script src='/index.js'></script>
+</body>
+</html>
+
+
+const express = require('express')
+const app = express()
+const http = app.listen(3000)
+const bodyParser = require('body-parser')
+const {router, pool} = require('./user-auth/user')
+//const chat = require('./chat/chat')
+const io = require('socket.io')(http)
+// 0988271000
+app.use('/',router)
+//app.use('/chat',chat)
+app.use(express.static(__dirname + '/public/'))
+
+app.set('view engine', 'ejs')
+
+const encoder = bodyParser.urlencoded({ extended: false })
+
+app.get('/',function(req,res){
+ res.send('best chat app in the WORLD')
+})
+
+app.get('/index/:id', function(req,res){
+  pool.connect()
+ pool.query("SELECT username,image,f_id FROM user_data WHERE id = '"+req.params.id+"';",(err, data)=>
+ {
+   f_data = getFriendsData(data.rows[0].f_id)
+   setTimeout(()=>{
+  res.render('index', { myid: req.params.id, name: data.rows[0].username, photo: data.rows[0].image, fid: data.rows[0].f_id,fname: f_data.name, fimage: f_data.image })
+},1000)
+})
+})
+
+
+app.get('/find/:myid', encoder, function(req,res){
+  console.log(req.params.myid)
+  if(req.query.friend_name!=null){
+ 
+  pool.query("SELECT image, id FROM user_data WHERE username = '"+req.query.friend_name+"'",(err,data)=>
+  {
+    var img_list = new Array(), id_list = new Array()
+    for(i in data.rows){
+       img_list[i] = data.rows[i].image
+      id_list[i] = data.rows[i].id
+    }
+    res.render('searched-friends', {uid: req.params.myid, f_photo : img_list, f_id : id_list,f_name : req.query.friend_name })
+ })
+}
+  else{
+    res.render('search-friend',{uid: req.params.myid})
+  }
+})
+
+app.get('/add/:id/:myid', (req,res)=>{
+  
+  pool.query("SELECT f_id FROM user_data WHERE id = '"+req.params.myid+"';",(err,data)=>
+  {
+    var f_id_list,  f_name_list
+    if(data.rows[0].f_id != null){
+    f_id_list = data.rows[0].f_id
+    f_id_list.push(parseInt(req.params.id))
+    f_id_list = removeDuplicates(f_id_list)
+    }
+    else{
+      f_id_list = new Array()
+      f_id_list.push(parseInt(req.params.id))
+    }
+    pool.query("UPDATE user_data SET f_id = '{"+f_id_list+"}' WHERE id = "+req.params.myid+";")
+    res.redirect('/index/'+req.params.myid)
+ })
+})
+
+function removeDuplicates(array) {
+  return array.filter((a, b) => array.indexOf(a) === b)
+};
+
+function getFriendsData(f_id){
+  var f_name = new Array(),f_image = new Array()
+  for(i in f_id){
+    pool.query("SELECT username, image  FROM user_data WHERE id = "+f_id[i]+";",(err,data)=>{
+        f_name.push(data.rows[0].username)
+        f_image.push(data.rows[0].image)  
+    })
+  }
+   f_data = {name : f_name, image: f_image}
+   return(f_data)
+  
+}
+
+app.get('/chat:room',function(req,res){
+  res.render('chat',{room_name: req.params.room})
+})
+
+const rooms = {}
+
+app.get('/room:room', (req, res)=> {
+room[req.query.room] = {user: {}}
+io.emit('room', 'req.query.room')
+redirect('chat/'+ req.body.room)
+})
+
+//soc
+io.on('connection', socket => {
+socket.emit('msg','connected')
+
+socket.on('join-room', (room, name)=>{
+  socket.join(room)
+  rooms[room].users[socket.id] = name
+  socket.to(room).broadcast('user-connected', name)
+})
+
+socket.on('send-chat', (room, msg)=>{
+  socket.to(room).broadcast('chat-massage', {name: rooms[room].users[socket.id], msg: msg })
+  });
+
+})
+
+
+
+
+
+ pool.query("UPDATE  user_data SET f_id = '{"+f_id_list+"}' , f_name = '{""}' ",(err,data)=>{
+     if(err){console.log(err)}
+     else {console.log(data)}
+   })

@@ -1,0 +1,56 @@
+<!--put / before chat.css after converting to ejs-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chat-app</title>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
+   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+   <link href="chat.css" rel="stylesheet" type="text/css"></link>
+   <link href="menu.css" rel="stylesheet" type="text/css"></link>
+</head>
+<body>
+    <div id="title">
+        <h1 id='h1'>Chat app</h1>
+    </div>
+    <div class="pages">
+        <div class="friendpage">
+            <div class='title'>
+                Online Friends
+            </div>
+            <div class="onlineflist">
+                
+            </div>
+            <div class='line'></div>
+            </div>
+
+        </div>
+    <div class="chatpage">
+
+    <div id="container">
+    <div class='heading'>
+        <div class='fimg'><img src="/public/user-images/default.png"></div>
+        <h2 id='fname'><%=f_name%></h2>
+    </div>
+    <div class='id' id="myid"><%=my_id%></div>
+    <div class='id' id="fid"><%=f_id%></div>
+    <div id="block-<%=f_name%>"> 
+        
+    <div class="chat" id = "chat">
+        hello 
+    </div>
+    <div class="mychat" id = "mychat">
+        hey  
+ </div>
+        <input type='text' name='text' id='text' placeholder="type here">
+        <button onclick='send()'>send</button>
+    </div>
+</div>
+</div>
+</div>
+<!--<script src='/menu.js'></script>-->
+<script src='/chat.js'></script>
+</body>
+</html>

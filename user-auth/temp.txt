@@ -1,0 +1,15 @@
+const storage = multer.diskStorage({
+  destination : function(req, file, cb){
+    cb(null,'./uploads/')
+  },
+  
+  filename :  function(req, file, cb){
+    cb(null, new Date().toISOString() + file.originalname)
+  }
+ 
+})
+
+ io.on('connection', socket => {
+    socket.broadcast.emit('online', req.params.mydata[0])
+  })
+  // 0988271000

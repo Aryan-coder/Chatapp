@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="/index.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div class="container">
+        <div class="heading">Search friend</div>
+        <form action="/find/<%= uid %>">
+                <input type="text" name='friend_name' placeholder="Enter frind's name">
+                <button type="submit">search</button>
+        </form>
+        <div class="list">
+            <% for(i in f_id){ %> 
+                <div  class="friend-status"><div class='image'><img src="/user-images/img<%=f_id[i]%>"></div><div class="friend"><%=f_name%></div><div class='button'><a href = "/add/<%=f_id[i]%>/<%=f_name%>/<%= uid %>">add</a></div></div>
+                <div class="line"></div>
+               <% } %>
+        </div>
+    </div>
+    <script src="/chat.js"></script>
+</body>
+</html>

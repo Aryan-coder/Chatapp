@@ -1,0 +1,102 @@
+body{
+    background-color: rgb(134, 152, 212);
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    font-family: Arial;
+}
+
+.container{
+    margin-top: 30px;
+    width: max-content;
+    height: max-content;
+    background-color:yellowgreen;
+    border-style: solid; 
+    border-radius: 0px;
+    border-color: transparent;
+
+      -moz-box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
+  -webkit-box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
+  box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
+
+  filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30)";
+  zoom: 1
+}
+
+input{
+    width: 320px;
+    border: 0px;
+    height: 40px;
+    font-size: larger;
+    margin-bottom: 30px;
+    padding-left: 10px;
+}
+
+.title{
+    color: aqua;
+    font-size: 30px;              
+}
+
+#sign{
+    background-color: blueviolet;
+     padding-right: 70px;
+     padding-left: 60px;
+     padding-top: 20px;
+     padding-bottom: 20px;
+     float: left;
+}
+
+#log{
+    background-color: brown;
+    padding-right: 60px;
+    padding-left: 70px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    float: right;
+}
+
+.head{
+    display: flex;
+}
+
+a{
+    color: white;
+}
+
+.colored{
+    background-color:  rgb(128, 104, 23);
+}
+
+.colored:hover{
+    background-color: brown;
+}
+
+.form{
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 150px;
+    margin-bottom: 50px;
+}
+
+button{
+    width: 100px;
+    height: 50px;
+    background-color: rgb(141, 38, 238);
+    border: 0px;
+    color: cornsilk;
+    margin-top: 20px;
+    font-size: large;
+    margin-left: 100px;
+}
+
+button:hover
+{
+background-image:none !important;
+background-color: rgb(18, 8, 151) !important;
+}
+
+button:active{
+    background-color: greenyellow !important;
+    color: black;
+}
