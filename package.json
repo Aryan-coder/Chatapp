@@ -21,7 +21,7 @@
     "body-parser": "^1.19.0",
     "connector": "0.0.1",
     "ejs": "^3.0.1",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-back": "0.0.2",
     "init": "^0.1.2",
     "jquery": "^3.4.1",
